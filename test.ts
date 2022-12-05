@@ -31,3 +31,42 @@ const mySecondFoo = (name: string, age: number): IPlayer => {
     age,
   };
 };
+
+//overloading
+type MyAdd = {
+  (a: number, b: number): number;
+  (a: number, b: number, c: number): number;
+};
+
+const myAddFunc: MyAdd = (a, b, c?: number) => a + b;
+
+myAddFunc(1, 2, 3);
+myAddFunc(1, 2);
+
+type OverloadingTest = {
+  (a: string, b: number): void;
+  (a: number, b: string): void;
+};
+
+const MyOver: OverloadingTest = (a, b) => {
+  if (typeof a === "string" && typeof b === "number") {
+    b + 1;
+  } else if (typeof a === "number" && typeof b === "string") {
+    a + 1;
+  }
+};
+
+MyOver(1, "myName");
+MyOver("yourname", 2);
+
+// generic
+
+type MyGeneric = {
+  <T, V>(a: T, b: V[]): void;
+};
+
+const myGenFunc: MyGeneric = (a, b) => {
+  console.log(a, b);
+};
+
+myGenFunc({ name: "nico", age: 3 }, [1, 2, 3, 4]);
